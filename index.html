@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Time Display</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .time-container {
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="time-container text-center">
+        <span id="current-time"></span>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const amPm = hours >= 12 ? 'PM' : 'AM';
+
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // Convert hour '0' to '12'
+
+            // Add leading zeros to minutes and seconds
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+            const formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+            const timeString = `${hours}:${formattedMinutes}:${formattedSeconds} ${amPm}`;
+            document.getElementById('current-time').innerText = timeString;
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+        // Initialize time display
+        updateTime();
+    </script>
+</body>
+</html>
